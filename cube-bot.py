@@ -30,7 +30,7 @@ def on_ready():
     storedQuote = []
     storedFortune = []
     print('------------------')
-    channel = discord.Object(id='278559327789514753')
+    channel = discord.Object(id='channel')
     yield from bot.send_message(channel,'QB is online!')
 
 @bot.event
@@ -41,9 +41,8 @@ def on_message(message):
     storedFortune = []
 
     msg_content = message.content
-
-    # User responses fuuko
-    if (message.author.id == '278701369765003264'):
+	
+    if (message.author.id == 'user_id'):
         if (re.match('Achoo!')):
             msg = ('{0.author.mention}, bless you!').format(message)
             yield from bot.send_message(message_channel, msg)
@@ -101,7 +100,7 @@ def on_message(message):
     #--------- Admin commands-----------------------------------
 
     # commands in this section should only be executed if called by a specific user (hopefully the bot's owner)
-    if (message.author.id == '270058815171461121'):
+    if (message.author.id == 'User_ID'):
         if (message.content == '!kill'):
             # disconnects fromt the discord server and ends the script
             yield from bot.send_message(message.channel, 'Goodbye!')
@@ -109,7 +108,7 @@ def on_message(message):
             exit()
    
     #stringo's admin command
-    if (message.author.id == '232684662244376576'):
+    if (message.author.id == 'USER_ID'):
         if (message.content == '!timecube'):
             # disconnects fromt the discord server and ends the script
             yield from bot.send_message(message.channel, 'Goodbye!')
@@ -168,6 +167,6 @@ def main():
 
     print('\nAttempting to log in...')
     # Bot token, do not change this. This allows the bot to login to the discord server
-    bot.run("Mjg1NzkyMDM1NTY5NDAxODU3.C5Xrfw.99-cZmqDLQKcI_Zhpf04d90BwTE")
+    bot.run("BOT_ID")
 
 main()
