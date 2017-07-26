@@ -26,47 +26,82 @@ def on_ready():
     print("Bot username: %s" % bot.user.name)
     print("Bot id: %s" % bot.user.id)
     print("creating arrays...")
-    storedKoan = []
-    storedQuote = []
-    storedFortune = []
+    bot.storedKoan = [random.choice(open('koan.txt').readlines()) for i in range(10)]
+    bot.storedQuote = [random.choice(open('quotes.txt').readlines()) for i in range(10)]
+    bot.storedFortune = [random.choice(open('fortune.txt').readlines()) for i in range(10)]
+    bot.storedQuote2 = [random.choice(open('quotes2.txt').readlines()) for i in range(10)]
     print('------------------')
-    channel = discord.Object(id='channel')
+    channel = discord.Object(id='266173062716588034')
     yield from bot.send_message(channel,'QB is online!')
 
 @bot.event
 @asyncio.coroutine
 def on_message(message):
-    storedKoan = []
-    storedQuote = []
-    storedFortune = []
 
     msg_content = message.content
-	
-    if (message.author.id == 'user_id'):
+
+    # User responses fuuko
+    if (message.author.id == '278701369765003264'):
         if (re.match('Achoo!')):
             msg = ('{0.author.mention}, bless you!').format(message)
             yield from bot.send_message(message_channel, msg)
 
-    if message.author == bot.user:
+    if (message.author == '285792035569401857'):
         # prevents the bot from responding to itself
         return
-    
-    if (re.match('\!koan', message.content.lower())):
+
+    if (message.author == '278549466179436545'):
+        msg = ('{0.author.mention}, butt').format(message)
+        yield from bot.send_message(message_channel, msg)
+
+    if (re.match('\.koan', message.content.lower())):
             # magic eight ball check
-            msg = ('{0.author.mention}, %s' % random_line("koan.txt", storedKoan)).format(message)
+            msg = ('{0.author.mention}, %s' % random_line("koan.txt", bot.storedKoan)).format(message)
             yield from bot.send_message(message.channel, msg)
             
 
-    if (re.match('\!fortune', message.content.lower())):        
+    if (re.match('\.fortune', message.content.lower())):        
 	    # fortunes!
-	    msg = ('{0.author.mention}, %s' % random_line("fortune.txt",storedFortune)).format(message)
+	    msg = ('{0.author.mention}, %s' % random_line("fortune.txt", bot.storedFortune)).format(message)
 	    yield from bot.send_message(message.channel, msg)
 	    
 
-    if (re.match('\!quote', message.content.lower())):
+    if (re.match('\.quote', message.content.lower())):
 	    #quotes!
-	    msg = ('{0.author.mention}, %s' % random_line("quotes.txt", storedQuote)).format(message)
+	    msg = ('{0.author.mention}, %s' % random_line("quotes.txt", bot.storedQuote)).format(message)
 	    yield from bot.send_message(message.channel, msg)
+
+    if (re.match('\.yearquote', message.content.lower())):
+            msg = ('{0.author.mention}, %s' % random_line("quotes2.txt", bot.storedQuote2) + ', ' + randomDate()).format(message)
+            yield from bot.send_message(message.channel, msg)
+            print(msg)
+            print(bot.storedQuote2)
+
+    if (re.match('hey cubey', message.content.lower())):
+            msg = ('{0.author.mention}, Hm?').format(message)
+            yield from bot.send_message(message.channel, msg)
+
+#--------------------- no clue why this doesn't work, but it's fucking up the rest of the code -------------------------------------------------
+#    if (re.match('what is ([0-9\.]+?) ?(yen|yuan|pounds|euros|pesos|canadian|australian)?', re.IGNORECASE)):
+#            args = re.match('what is ([0-9\.]+?) ?(yen|yuan|pounds|euros|pesos|canadian|australian)? in dollars?', re.IGNORECASE)
+#            if (args[1] == 'yen'):
+#                currency = 'yen'
+#            if (args[1] == 'yuan'):
+#                currency = 'yuan'
+#            if (args[1] == 'euros'):
+#                currency = 'euros'
+#            if (args[1] == 'pounds'):
+#                currency = 'pounds'
+#            if (args[1] == 'pesos'):
+#                currency = 'pesos'
+#            if (args[1] == 'canadian'):
+#                currency = 'canadian'
+#            if (args[1] == 'australian'):
+#                currency = 'australian'
+#            msg = ('{0.author.mention}' + currency + ' is ' + ' %s' % conversionToDollar(args[0], currency) + ' dollars').format(message)
+#            print(msg)
+#            yield from bot.send_message(message.channel, msg)
+#-------------------------------------------------------------------------------------------------------------------------------------------------
 
 # implement later    
 #    if (re.match('?(you|he|she|it|it\'s)[\,\ ]? (.+) a big', message.content.lower())):
@@ -95,21 +130,25 @@ def on_message(message):
             msg = ('{0.author.mention}, TL NOTE: hawaii means cute').format(message)
             yield from bot.send_message(message.channel, msg)
 
+    if (re.match('thicc', message.content.lower())):
+            msg = ('{0.author.mention}, TL NOTE: thicc means morbidly obese').format(message)
+            yield from bot.send_message(message.channel, msg)
+
 #-------------------------------------------------------------------------------------------
 
     #--------- Admin commands-----------------------------------
 
     # commands in this section should only be executed if called by a specific user (hopefully the bot's owner)
-    if (message.author.id == 'User_ID'):
-        if (message.content == '!kill'):
+    if (message.author.id == '270058815171461121'):
+        if (message.content == '.kill'):
             # disconnects fromt the discord server and ends the script
             yield from bot.send_message(message.channel, 'Goodbye!')
             yield from bot.close()
             exit()
    
     #stringo's admin command
-    if (message.author.id == 'USER_ID'):
-        if (message.content == '!timecube'):
+    if (message.author.id == '232684662244376576'):
+        if (message.content == '.timecube'):
             # disconnects fromt the discord server and ends the script
             yield from bot.send_message(message.channel, 'Goodbye!')
             yield from bot.close()
@@ -124,6 +163,36 @@ def Random_Message(response_list):
 def random_line(afile, storage):
     # now a clusterfuck of stackoverflow answers!
     # less random, but now offers unique answers!
+    lines = open(afile).read().splitlines()
+    line = random.choice(lines)
+    lineMatch = 1
+    while (lineMatch == 1):
+        for i in range(len(storage)):
+            if line != storage[i]:
+                lineMatch = 0
+            if line == storage[i]:
+                line = random.choice(lines)
+                i = 0
+
+    if storage == bot.storedKoan:
+        bot.storedKoan.pop(0)
+    if storage == bot.storedFortune:
+        bot.storedFortune.pop(0)
+    if storage == bot.storedQuote:
+        bot.storedQuote.pop(0)
+    if storage == bot.storedQuote2:
+        bot.storedQuote2.pop(0)
+    if storage == bot.storedKoan:
+        bot.storedKoan.append(line)
+    if storage == bot.storedFortune:
+        bot.storedFortune.append(line)
+    if storage == bot.storedQuote:
+        bot.storedQuote.append(line)
+    if storage == bot.storedQuote2:
+        bot.storedQuote2.append(line)
+    return line
+
+# old crap that does not work ----------------------------------------------------
 #    if len(storage) >= 10:
     # NOTE: I have no clue if using storage.append would modify storage or the arg, so I'm using if statements to be safe
 #        if storage == storedKoan:
@@ -133,16 +202,16 @@ def random_line(afile, storage):
 #        if storage == storedQuote:
 #            storedQuote.pop(0)
 
-    line_num = 0
-    selected_line = ''
-    with open(afile) as fp:
-       while 1:
-         line = fp.readline()
-         if not line: break
-         line_num += 1
-         if random.uniform(0, line_num) < 1:
-             selected_line = line
-    return selected_line.strip()
+#    line_num = 0
+#    selected_line = ''
+#    with open(afile) as fp:
+#       while 1:
+#         line = fp.readline()
+#         if not line: break
+#         line_num += 1
+#         if random.uniform(0, line_num) < 1:
+#             selected_line = line
+#    return selected_line.strip()
 
 #                 if line != storage[i]:
                  # NOTE: I have no clue if using storage.append would modify storage or the arg, so I'm using if statements to be safe
@@ -152,6 +221,35 @@ def random_line(afile, storage):
 #                         storedFortune.append(line)
 #                     if storage == storedQuote:
 #                         storedquote.append(line)
+#--------------------------------------------------------------
+def conversionToDollar(amount, currency):
+    if (currency == 'yen'):
+        conversion = (str(amount * 112.66))
+    if (currency == 'yuan'):
+        conversion = (str(amount * 6.78))
+    if (currency == 'pound'):
+        conversion = (str(amount * 0.76))
+    if (currency == 'euros'):
+        conversion = (str(amount * 0.87))
+    if (currency == 'pesos'):
+        conversion = (str(amount * 17.60))
+    if (currency == 'canadian'):
+        conversion = (str(amount * 1.27))
+    if (currency == 'australian'):
+        conversion = (str(amount * 1.28))
+
+    return conversion
+    
+
+def randomDate():
+    randYearAD = (str(random.randint(0,3000)) + " AD")
+    randYearBC = (str(random.randint(1,6000)) + " BC")
+    yearChoice = random.choice('AB')
+    if (yearChoice == 'A'):
+        return randYearAD
+    if (yearChoice == 'B'):
+        return randYearBC
+
 def main():
     print('\nLoading scripts...')
     #checks for files
@@ -159,14 +257,17 @@ def main():
       print('\nfortunes.txt not found! exiting')
       exit()
     if os.path.isfile('quotes.txt') is False:
-      print('quotes.txt not found! exiting')
+      print('\nquotes.txt not found! exiting')
       exit()
     if os.path.isfile('koan.txt') is False:
       print('\nkoan.txt not found! exiting')
       exit()
+    if os.path.isfile('quotes2.txt') is False:
+      print('\nquotes2.txt not found! exiting')
+      exit()
 
     print('\nAttempting to log in...')
     # Bot token, do not change this. This allows the bot to login to the discord server
-    bot.run("BOT_ID")
+    bot.run("Mjg1NzkyMDM1NTY5NDAxODU3.C5Xrfw.99-cZmqDLQKcI_Zhpf04d90BwTE")
 
 main()

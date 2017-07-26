@@ -59,3 +59,18 @@
 “To err is human, but to really foul things up you need a computer.” – Paul R. Ehrlich
 “Normal people … believe that if it ain’t broke, don’t fix it. Engineers believe that if it ain’t broke, it doesn’t have enough features yet.” – Scott Adams
 “All it takes is one bad day to reduce the sanest man alive to lunacy. That's how far the world is from where I am. Just one bad day.” ― The Joker, Batman: The Killing Joke by Alan Moore
+"Useless laws weaken necessary laws" - Charles de Montesquieu
+"The tyranny of a prince in an oligarchy is not so dangerous to the public welfare as the apathy of a citizen in a democracy." - Charles de Montesquieu
+"Words are loaded pistols" - Jean Sartre
+"Patience is bitter but it's fruit is sweet" - Jean Jaques Rousseau
+"No man has any natural authority over his fellow man" - Jean Jaques Rousseau
+"Let every nation know, whether it wishes us well or ill, that we shall pay any price, bear any burden, meet any hardship, support any friend, oppose any foe to assure the survival and the success of liberty." - John F. Kennedy
+"Democracy and socialism have nothing in common but one word, equality. But notice the difference: while democracy seeks equality in liberty, socialism seeks equality in restraint and servitude." - Alexis de Tocqueville
+"I had reasoned this out in my mind, there was one of two things I had a right to, liberty or death; if I could not have one, I would have the other." - Harriet Tubman
+"Is life so dear or peace so sweet as to be purchased at the price of chains and slavery? Forbid it, Almighty God! I know not what course others may take, but as for me, give me liberty, or give me death!" - Patrick Henry
+"Left-wing politicians take away your liberty in the name of children and of fighting poverty, while right-wing politicians do it in the name of family values and fighting drugs. Either way, government gets bigger and you become less free." - Harry Browne
+"'Emergencies' have always been the pretext on which the safeguards of individual liberty have been eroded." - Friedrich August von Hayek
+"Some people are born mediocre, some people achieve mediocrity, and some people have mediocrity thrust upon them." - Joseph Heller, Catch-22
+"Why not whip the teacher when the pupil misbehaves?" - Diogenes
+"No matter how much cats fight, there always seem to be plenty of kittens." - Abraham Lincoln
+
